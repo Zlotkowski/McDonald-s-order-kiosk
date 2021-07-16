@@ -128,7 +128,7 @@ export default function ReviewScreen(props) {
           {orderItems.map((orderItem) => (
             <Grid item md={12} key={orderItem.name}>
               <Card
-                className={styles.card}
+                className={styles.cardReview}
                 onClick={() => productClickHandler(orderItem)}
               >
                 <CardActionArea>

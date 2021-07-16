@@ -40,7 +40,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
-  card: { margin: 10 },
+  cardReview: { margin: 2 },
+  card: { margin: 2, width: 220, height: 280 },
   title: {
     marginTop: 18,
   },

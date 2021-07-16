@@ -190,7 +190,7 @@ export default function OrderScreen(props) {
                 <Alert severity="error">{errorProducts}</Alert>
               ) : (
                 products.map((product) => (
-                  <Grid item md={6}>
+                  <Grid item md={6} key={product.name}>
                     <Card
                       className={styles.card}
                       onClick={() => productClickHandler(product)}

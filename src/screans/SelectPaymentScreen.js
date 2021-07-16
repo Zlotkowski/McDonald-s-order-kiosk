@@ -5,22 +5,22 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from '@material-ui/core';
-import React, { useContext } from 'react';
-import { useStyles } from '../styles';
-import Logo from '../components/Logo';
-import { setPaymentType } from '../actions';
-import { Store } from '../Store';
+} from "@material-ui/core";
+import React, { useContext } from "react";
+import { useStyles } from "../styles";
+import Logo from "../components/Logo";
+import { setPaymentType } from "../actions";
+import { Store } from "../Store";
 
 export default function SelectPaymentScreen(props) {
   const { dispatch } = useContext(Store);
   const styles = useStyles();
   const selectHandler = (paymentType) => {
     setPaymentType(dispatch, paymentType);
-    if (paymentType === 'Pay here') {
-      props.history.push('/payment');
+    if (paymentType === "Pay here") {
+      props.history.push("/payment");
     } else {
-      props.history.push('/complete');
+      props.history.push("/complete");
     }
   };
   return (
@@ -38,7 +38,7 @@ export default function SelectPaymentScreen(props) {
       </Box>
       <Box className={styles.cards}>
         <Card className={[styles.card, styles.space]}>
-          <CardActionArea onClick={() => selectHandler('Pay here')}>
+          <CardActionArea onClick={() => selectHandler("Pay here")}>
             <CardMedia
               component="img"
               alt="Pay here"
@@ -58,7 +58,7 @@ export default function SelectPaymentScreen(props) {
           </CardActionArea>
         </Card>
         <Card className={[styles.card, styles.space]}>
-          <CardActionArea onClick={() => selectHandler('At counter')}>
+          <CardActionArea onClick={() => selectHandler("At counter")}>
             <CardMedia
               component="img"
               alt="At counter"
