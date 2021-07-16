@@ -80,6 +80,30 @@ const Order = mongoose.model(
   )
 );
 
+app.get("/api/orders", async (req, res) => {
+  const orders = await Order.find({ isDelivered: false, isCanceled: false });
+  res.send(orders);
+});
+
+app.put("/api/orders/:id", async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    if (req.body.action === "ready") {
+      order.isReady = true;
+      order.inProgress = false;
+    } else if (req.body.action === "deliver") {
+      order.isDelivered = true;
+    } else if (req.body.action === "cancel") {
+      order.isCanceled = true;
+    }
+    await order.save();
+
+    res.send({ message: "Done" });
+  } else {
+    req.status(404).message({ message: "Order not found" });
+  }
+});
+
 app.post("/api/orders", async (req, res) => {
   const lastOrder = await Order.find().sort({ number: -1 }).limit(1);
   const lastNumber = lastOrder.length === 0 ? 0 : lastOrder[0].number;
@@ -93,6 +117,19 @@ app.post("/api/orders", async (req, res) => {
   }
   const order = await Order({ ...req.body, number: lastNumber + 1 }).save();
   res.send(order);
+});
+
+app.get("/api/orders/queue", async (req, res) => {
+  const inProgressOrders = await Order.find(
+    { inProgress: true, isCanceled: false },
+    "number"
+  );
+  const servingOrders = await Order.find(
+    { isReady: true, isDelivered: false },
+    "number"
+  );
+
+  res.send({ inProgressOrders, servingOrders });
 });
 
 app.use(express.static(path.join(__dirname, "/build"))); //serve all files to build folder

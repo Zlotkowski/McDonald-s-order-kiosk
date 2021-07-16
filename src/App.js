@@ -5,14 +5,18 @@ import {
   Paper,
   ThemeProvider,
 } from "@material-ui/core";
+import { useContext } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import AdminScreen from "./screans/AdminScreen";
 import ChooseScreen from "./screans/ChooseScreen";
 import CompleteOrderScreen from "./screans/CompleteOrderScreen";
 import HomeScreen from "./screans/HomeScreen";
 import OrderScreen from "./screans/OrderScreen";
 import PaymentScreen from "./screans/PaymentScreen";
+import QueueScreen from "./screans/QueueScreen";
 import ReviewScreen from "./screans/ReviewScreen";
 import SelectPaymentScreen from "./screans/SelectPaymentScreen";
+import { Store } from "./Store";
 
 const theme = createTheme({
   typography: {
@@ -37,11 +41,13 @@ const theme = createTheme({
 });
 
 function App() {
+  const { state } = useContext(Store);
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth="sm">
+        <Container maxWidth={state.widthScreen ? "lg" : "sm"}>
           <Paper>
             <Route path="/" component={HomeScreen} exact={true}></Route>
             <Route path="/choose" component={ChooseScreen} exact={true}></Route>
@@ -58,6 +64,8 @@ function App() {
               component={CompleteOrderScreen}
               exact
             ></Route>
+            <Route path="/admin" component={AdminScreen} exact></Route>
+            <Route path="/queue" component={QueueScreen} exact></Route>
           </Paper>
         </Container>
       </ThemeProvider>

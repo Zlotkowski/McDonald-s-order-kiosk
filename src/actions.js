@@ -14,6 +14,13 @@ import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  ORDER_LIST_REQUEST,
+  SCREEN_SET_WIDTH,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAIL,
+  ORDER_QUEUE_LIST_REQUEST,
+  ORDER_QUEUE_LIST_SUCCESS,
+  ORDER_QUEUE_LIST_FAIL,
 } from "./constants";
 
 export const setOrderType = (dispatch, orderType) => {
@@ -96,6 +103,40 @@ export const createOrder = async (dispatch, order) => {
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+export const listOrders = async (dispatch) => {
+  dispatch({ type: SCREEN_SET_WIDTH });
+  dispatch({ type: ORDER_LIST_REQUEST });
+  try {
+    const { data } = await Axios.get(`/api/orders`);
+    return dispatch({
+      type: ORDER_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    return dispatch({
+      type: ORDER_LIST_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+export const listQueue = async (dispatch) => {
+  dispatch({ type: SCREEN_SET_WIDTH });
+  dispatch({ type: ORDER_QUEUE_LIST_REQUEST });
+  try {
+    const { data } = await Axios.get(`/api/orders/queue`);
+    return dispatch({
+      type: ORDER_QUEUE_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    return dispatch({
+      type: ORDER_QUEUE_LIST_FAIL,
       payload: error.message,
     });
   }
