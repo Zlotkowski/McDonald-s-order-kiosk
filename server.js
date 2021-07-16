@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const data = require("./data");
@@ -94,6 +95,8 @@ app.post("/api/orders", async (req, res) => {
   console.log(order);
   res.send(order);
 });
+
+app.use(express.static(path.join(__dirname, "/build"))); //serve all files to build folder
 
 const port = process.env.PORT || 5000;
 
