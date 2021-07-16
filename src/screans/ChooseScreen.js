@@ -28,7 +28,7 @@ export default function ChooseScreen(props) {
         <Box className={[styles.main, styles.center]}>
           <Logo large></Logo>
           <Typography
-            variant="3h"
+            variant="h3"
             component="h3"
             className={styles.center}
             gutterBottom
