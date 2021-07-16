@@ -92,7 +92,6 @@ app.post("/api/orders", async (req, res) => {
     return res.send({ message: "Data is required." });
   }
   const order = await Order({ ...req.body, number: lastNumber + 1 }).save();
-  console.log(order);
   res.send(order);
 });
 
