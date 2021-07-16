@@ -98,6 +98,10 @@ app.post("/api/orders", async (req, res) => {
 
 app.use(express.static(path.join(__dirname, "/build"))); //serve all files to build folder
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/build/index.html"));
+});
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
