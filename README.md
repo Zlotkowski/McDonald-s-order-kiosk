@@ -2,4 +2,4 @@
 
 Self order kiosk witch queue orders and admin pages witch using ReactJS, ContextAPI, MaterialUI, NodeJS, MongoDB
 
-[Link to app in herokuu](https://zlotkowski-order-kiosk.herokuapp.com/)
+[Link to app in heroku](https://zlotkowski-order-kiosk.herokuapp.com/)
